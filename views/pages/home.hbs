@@ -1,0 +1,69 @@
+{{>head}}
+{{>navigation}}
+<div class="text-center mt-5">
+    <h1>Trending Posts</h1>
+    <hr>
+</div>
+{{#if successMessage}}
+<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    {{successMessage}}
+</div>
+{{/if}}
+{{#if errorMessage}}
+<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <strong>Sorry!</strong>{{errorMessage}}
+</div>
+{{/if}}
+{{#if Post}}
+<div class="row row-cols-1 row-cols-md-3 g-4 me-1 ms-1">
+    {{#each Post}}
+    <div class="col">
+        <div class="card h-100">
+            <img id="image" src="{{this.imageUrl}}" class="card-img-top" alt="..." height="300">
+            <h6 class="text-center mt-3 mb-0 text-muted">Creator:{{creator this.UserId}}</h6>
+            <hr>
+            <div class="card-body">
+                <h5 class="card-title">{{this.Title}}</h5>
+                <p class="card-text">{{sliceDesc this.description}}</p>
+                <div class="card-text"><small class="text-muted">Last updated {{getDate this.updatedAt}} ago</small></div>
+                <div class="text-end">
+                    {{#if this.bookmark}}
+                    <a href="/postDetails/{{this.id}}" class="btn btn-primary btn-sm" role="button">Details</a>
+          
+                    <button id="btn{{this.id}}" type="submit" class="btn btn-dark btn-sm"
+                        onclick="favoritePost({{this.id}})" data-bs-toggle="tooltip" title="remove from favorite">
+                        <i class="bi bi-bookmarks"></i>
+                    </button>
+                    {{else}}
+                    <a href="/postDetails/{{this.id}}" class="btn btn-primary btn-sm" role="button">Details</a>
+                    <button id="btn{{this.id}}" type="submit" class="btn btn-outline-dark btn-sm"
+                        onclick="favoritePost({{this.id}})" data-bs-toggle="tooltip" title="add to favorite">
+                        <i class="bi bi-bookmarks"></i>
+                    </button>
+                    {{/if}}
+                </div>
+                {{#if this.liked}}
+                <button id="lbtn{{this.id}}" type="submit" onclick="likedPost({{this.id}})"
+                    class="btn btn-danger btn-sm"><i class="bi bi-heart"></i></button>
+                <span class="mx-2"><strong id="count{{this.id}}">{{likesCount this.id}}</strong></span></span>
+                {{else}}
+                <button id="lbtn{{this.id}}" type="submit" onclick="likedPost({{this.id}})"
+                    class="btn btn-outline-danger btn-sm"><i class="bi bi-heart"></i></button>
+                <span class="mx-2"><strong id="count{{this.id}}">{{likesCount this.id}}</strong></span>
+                {{/if}}
+                <form action="/likesBy" method="post">
+                    <input type="hidden" value="{{this.id}}" name="id">
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Liked By</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<div class="text-center mt-5">
+    <h3>No Post Found!</h3>
+</div>
+{{/if}}
+<script src="script.js"></script>
+{{>end}}

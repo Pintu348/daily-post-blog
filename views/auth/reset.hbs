@@ -1,0 +1,27 @@
+{{>head}}
+{{>navigation}}
+<div class="text-center mt-5">
+    <h3>Reset Password Page</h3>
+    <hr>
+</div>
+<div id="dw" class="text-center w-25 container mt-5">
+    <div class="shadow p-3 bg-body rounded">
+        <main class="form-signin">
+            <form action="/resetpassword" method="post">
+                <h1 class="h3 mb-3 fw-normal">Reset Password Form</h1>
+                {{#if errorMessage}}
+                <div class="alert alert-danger alert-dismissible fade show fs-6" role="alert"><p>{{errorMessage}}</p></div>
+                {{/if}}
+                <div class="form-floating">
+                    <input type="email" class="form-control mb-2" id="floatingInput" placeholder="name@example.com"
+                        name="email" required>
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Reset Password</button>
+                <p class="mt-3 mb-3 text-muted">© 2023</p>
+            </form>
+        </main>
+    </div>
+</div>
+<script src="devicewidth.js"></script>
+{{>end}}

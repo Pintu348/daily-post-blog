@@ -1,0 +1,55 @@
+{{>head}}
+{{>navigation}}
+<div class="text-center mt-5">
+    {{#if editing}}<h3>Update Post Page</h3>{{else}}<h3>Add Post Page</h3>{{/if}}
+    <hr>
+</div>
+<div id="dw" class="w-25 container">
+    <div class="shadow p-3 bg-body rounded">
+        <div class="text-end">
+            <a class="btn btn-primary btn-sm" href="/posts" role="button">Back</a>
+        </div>
+        <main class="form-signin">
+            <form action="{{#if editing}}/editPost{{else}}/addPost{{/if}}" method="post" enctype="multipart/form-data">
+                {{#each errorMessage}}
+                <div class="alert alert-danger alert-dismissible fade show fs-6" role="alert">
+                    <p>{{this}}</p>
+                </div>
+                {{/each}}
+                <div class="form-floating mt-2">
+                    <input type="text" class="form-control" id="floatingTitle" placeholder="Title" name="title"
+                        value="{{#if editing}}{{Post.Title}}{{/if}}" required>
+                    <label for="floatingTitle">News Title</label>
+                </div>
+                <div class="mt-2">
+                    <label for="formFile" class="form-label">Upload Image</label>
+                    <input class="form-control" type="file" id="formFile" name="image">
+                </div>
+                <div class="form-floating mt-3">
+                    <textarea type="text" class="form-control" id="floatingDescription" aria-label="With textarea"
+                        name="descrip">
+                    {{#if editing}}{{Post.description}}{{/if}}
+                    </textarea>
+                    <label for="floatingDescription">Description</label>
+                </div>
+                {{#if editing}}
+                <input type="hidden" value="{{Post.id}}" name="postId">
+                {{/if}}
+                <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">
+                    {{#if editing}}Update Post{{else}}Add Post{{/if}}
+                </button>
+                <div class="alert alert-danger alert-dismissible fade show mt-3 mb-0" role="alert">
+                    <strong>Note:</strong>Only jpg, jpeg, png, avif file supported!
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<script>
+    const width = document.getElementById("dw");
+    if(window.innerWidth<771)
+    {
+        width.setAttribute("class","container")
+    }
+</script>
+{{>end}}

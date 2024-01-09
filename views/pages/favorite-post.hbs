@@ -1,0 +1,44 @@
+{{>head}}
+{{>navigation}}
+<div class="text-center mt-5">
+    <h1>My Favorite Post</h1>
+    <hr>
+</div>
+{{#if successMessage}}
+<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    {{successMessage}}
+</div>
+{{/if}}
+{{#if errorMessage}}
+<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <strong>Sorry!</strong>{{errorMessage}}
+</div>
+{{/if}}
+{{#if favoritePost}}
+<div class="row row-cols-1 row-cols-md-3 g-4 me-1 ms-1">
+    {{#each favoritePost}}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{this.imageUrl}}" class="card-img-top" alt="..." height="300">
+            <div class="card-body">
+                <h5 class="card-title">{{this.Title}}</h5>
+                <p class="card-text">{{sliceDesc this.description}}</p>
+                <p class="card-text"><small class="text-muted">Last updated {{getDate this.updatedAt}} ago</small></p>
+                <div class="text-center">
+                    <form action="/deleteFavoritePost" method="post">
+                        <a href="/postDetails/{{this.id}}" class="btn btn-primary btn-sm" role="button">Details</a>
+                        <input type="hidden" value="{{this.id}}" name="id">
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<div class="text-center mt-5">
+    <h3>No Post Found!</h3>
+</div>
+{{/if}}
+{{>end}}

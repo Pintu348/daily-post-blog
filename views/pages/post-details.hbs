@@ -1,0 +1,23 @@
+{{>head}}
+{{>navigation}}
+<div class="text-end mt-5 me-5">
+  <a href="{{ternary url url " /"}}" class="btn btn-primary btn-sm" role="button">Back</a>
+</div>
+{{#if Post}}
+<div class="container shadow-sm bg-body rounded">
+  <div class="text-center mt-5">
+    <h1>{{Post.Title}}</h1>
+    <hr>
+    <img src="/{{Post.imageUrl}}" alt="loading..." class="mb-5 img-fluid" height="auto" width="500">
+    <h3>Description</h3>
+    <hr>
+  </div>
+  <p class="ms-5"><strong>{{Post.description}}</strong></p>
+</div>
+{{else}}
+<div class="text-center mt-5">
+  <hr>
+  <h3>Post Not Found!</h3>
+</div>
+{{/if}}
+{{>end}}

@@ -1,0 +1,22 @@
+{{>head}}
+{{>navigation}}
+<div class="text-end mt-5 me-5">
+    <a href="/" class="btn btn-primary btn-sm" role="button">Back</a>
+</div>
+{{#if LikedBy}}
+
+<div class="shadow p-3 bg-body rounded mt-5">
+    <h3>LikedBy</h3>
+    <ol type="1">
+        {{#each LikedBy}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ol>
+</div>
+
+{{else}}
+<div class="text-center mt-5">
+    <h3>No Any Likes Got!</h3>
+</div>
+{{/if}}
+{{>end}}
