@@ -128,7 +128,7 @@ const dbConnection = async () => {
     // await sequelize.sync({force:true});
     await sequelize.sync();
     console.log("Connection sql has been established successfully.");
-    await mongoose.connect(MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log("mongodb");
     const server = app.listen(process.env.PORT, () => {
       console.log("PORT NO - ", process.env.PORT);

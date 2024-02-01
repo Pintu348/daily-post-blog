@@ -1,6 +1,6 @@
 const User = require("../model/user");
 
-const { validationResult, header } = require("express-validator/check");
+const { validationResult, header } = require("express-validator");
 
 const io = require("../socket");
 
